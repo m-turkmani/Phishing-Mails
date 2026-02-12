@@ -35,7 +35,7 @@ Using this tool for malicious activities or without explicit written consent fro
    cd Phished_Mail
    chmod +x phish_mail.py
 
-<img width="564" height="372" alt="Image" src="https://github.com/user-attachments/assets/b118ac59-5d7c-44fa-a34e-1837e7364d32" />
+<img width="643" height="253" alt="alert" src="https://github.com/user-attachments/assets/87ec4a5c-111b-4cff-9845-7a7f444b712a" />
 <img width="564" height="372" alt="Image" src="https://github.com/user-attachments/assets/de631c9b-b569-4e1b-96e9-f2e67cfc3a9e" />
 
 
