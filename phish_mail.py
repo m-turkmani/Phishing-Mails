@@ -23,29 +23,32 @@ def clear():
 
 def help_message():
     print(f"""
-{Colors.YELLOW}--- Usage Instructions ---{Colors.CLEAR}
+{Colors.YELLOW}--- Usage Instructions & Technical Overview ---{Colors.CLEAR}
 
-{Colors.BOLD}Preparation:{Colors.CLEAR}
-1. Create a file {Colors.BLUE}message.html{Colors.CLEAR} containing your email content.
-2. If you have multiple targets, create a {Colors.BLUE}targets.txt{Colors.CLEAR} file where each 
-   email address is listed on a new line.
+{Colors.BOLD}1. Preparation:{Colors.CLEAR}
+- Create {Colors.BLUE}message.html{Colors.CLEAR} with your HTML phishing template.
+- Create {Colors.BLUE}targets.txt{Colors.CLEAR} (one email per line) for mass delivery.
 
-{Colors.BOLD}For your local relay (for testing):{Colors.CLEAR}
-- Start your relay (e.g., {Colors.GREEN}aiosmtpd -n -l localhost:1025{Colors.CLEAR}).
-- In the script, enter {Colors.YELLOW}localhost{Colors.CLEAR} as the host and {Colors.YELLOW}1025{Colors.CLEAR} as the port.
-- Leave username and password empty.
+{Colors.BOLD}2. Local Testing Mode (The "Safety Lab"):{Colors.CLEAR}
+- {Colors.CYAN}How it works:{Colors.CLEAR} You use a local sink like {Colors.GREEN}aiosmtpd{Colors.CLEAR} or your {Colors.GREEN}fake_smtp.py{Colors.CLEAR}.
+- {Colors.CYAN}Function:{Colors.CLEAR} These tools act as "Blackhole" servers. They accept the SMTP 
+  connection from this script but do NOT forward the mail to the internet.
+- {Colors.CYAN}Setup:{Colors.CLEAR} 
+  1. Start: {Colors.YELLOW}python3 fake_smtp.py{Colors.CLEAR}
+  2. In this script: Host={Colors.YELLOW}localhost{Colors.CLEAR}, Port={Colors.YELLOW}1025/1026{Colors.CLEAR}, No Auth/TLS.
+- {Colors.CYAN}Benefit:{Colors.CLEAR} Perfect for checking if your HTML layout and the "Fake Sender" 
+  display name look correct without triggering any real mail filters.
 
-{Colors.BOLD}For external SMTP servers (e.g., port 587):{Colors.CLEAR}
-- Enter the provider's host.
-- Enable STARTTLS (y).
-- Enter your real credentials.
+{Colors.BOLD}3. Real Production Mode (The "Engagement"):{Colors.CLEAR}
+- {Colors.CYAN}How it works:{Colors.CLEAR} This script connects directly to a real Mail Transfer Agent (MTA).
+- {Colors.CYAN}Setup:{Colors.CLEAR} Use hosts like {Colors.YELLOW}smtp.gmail.com{Colors.CLEAR} or {Colors.YELLOW}smtp.sendgrid.net{Colors.CLEAR}.
+- {Colors.CYAN}Requirements:{Colors.CLEAR} Port 587, STARTTLS={Colors.YELLOW}y{Colors.CLEAR}, and valid credentials.
 
-{Colors.RED}Delivery notice:{Colors.CLEAR} 
-If you use a local relay without authentication, emails sent to external 
-addresses (such as @gmail.com) will most likely be rejected because your computer 
-is not an authorized mail server for the sender domain (SPF/DKIM validation). 
-However, for internal pentests within a corporate network, the relay usually works 
-very well if the internal gateway allows emails from pentest machines.
+{Colors.RED}Important Delivery Notice:{Colors.CLEAR}
+A local relay (fake_smtp) cannot send to real addresses (like @gmail.com) 
+because it lacks SPF/DKIM signatures and a fixed IP. For real-world 
+delivery, always use a verified SMTP provider or an authorized internal 
+company relay that trusts your IP.
 """)
 
 def show_alert():
