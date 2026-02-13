@@ -59,8 +59,22 @@ To test the script safely without sending actual emails to the internet, you can
 
 ```
 pip install aiosmtpd
-aiosmtpd -n -l localhost:1025
+or
+apt install python3-aiosmtpd
+python3 -m aiosmtpd -n -l localhost:1025
+
 ```
+**2. Option B: Using the fake_smtp.py script**
+If you prefer a more formatted output with clear labels for "Sender", "Recipient", and "Content", run the provided debugging script:
+```
+python3 fake_smtp.py
+```
+In the main script (phish_mail.py), use the following settings for local tests:
+
+Host: localhost
+Port: 1025 (or 1026 depending on your script config)
+TLS/Authentication: Disabled (n)
+
 
 **In the script, use localhost as the host and 1025 as the port, with TLS and Authentication disabled.**
 
